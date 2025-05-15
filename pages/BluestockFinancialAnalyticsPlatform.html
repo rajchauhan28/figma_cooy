@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Bluestock - Stock Market Analytics For GenZ</title>
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Roboto:wght@400;600&display=swap' rel='stylesheet'>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+            height: 124px;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 45px;
+            width: 85px;
+        }
+        
+        .logo-text {
+            font-size: 45px;
+            font-weight: 700;
+            line-height: 68px;
+            color: #1e1e1e;
+            margin-left: 25px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .nav-item {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 23px;
+            color: #9a9a9a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item img {
+            margin-left: 8px;
+        }
+        
+        .badge-new {
+            background-color: #3e51ff;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 0 5px;
+            border-radius: 2px;
+            margin-left: 10px;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+        
+        .sign-in {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 23px;
+            color: #9a9a9a;
+            text-decoration: none;
+        }
+        
+        .sign-up {
+            background-color: #3e51ff;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 23px;
+            padding: 10px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .menu-toggle {
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            padding: 80px 50px;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background-color: #00ae6f;
+            color: #ffffff;
+            font-size: 23px;
+            font-weight: 600;
+            padding: 0 18px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .app-version {
+            display: inline-flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-left: 15px;
+        }
+        
+        .app-version img {
+            margin-left: 10px;
+        }
+        
+        .hero-title {
+            font-size: 51px;
+            font-weight: 700;
+            line-height: 76px;
+            color: #000000;
+            margin-bottom: 30px;
+        }
+        
+        .hero-description {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 31px;
+            color: #9a9a9a;
+            margin-bottom: 40px;
+        }
+        
+        .early-access-label {
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 19px;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        
+        .early-access-form {
+            display: flex;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            height: 59px;
+            width: 389px;
+            align-items: center;
+            padding: 0 15px;
+        }
+        
+        .country-code {
+            font-size: 15px;
+            font-weight: 600;
+            color: #141414;
+            margin-right: 15px;
+        }
+        
+        .mobile-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #667284;
+        }
+        
+        .submit-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .hero-image {
+            flex: 1;
+            background-color: #ecf0ff;
+            border-radius: 15px;
+            height: 651px;
+            width: 973px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 80px 50px;
+        }
+        
+        .features-intro {
+            margin-bottom: 50px;
+        }
+        
+        .features-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 36px;
+            color: #9a9a9a;
+            margin-bottom: 20px;
+        }
+        
+        .features-row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-item {
+            flex: 1;
+        }
+        
+        .feature-title {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 96px;
+            color: #ad00ff;
+            margin-bottom: 10px;
+        }
+        
+        .feature-title.black {
+            color: #000000;
+        }
+        
+        .feature-image {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-description {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 36px;
+            color: #595959;
+            text-align: center;
+        }
+        
+        /* Highlights Section */
+        .highlights-section {
+            padding: 50px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 51px;
+            font-weight: 700;
+            line-height: 77px;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 31px;
+            color: #9a9a9a;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .card {
+            background-color: #f7f5fd;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: left;
+            flex: 1;
+            height: 532px;
+        }
+        
+        .card.analytics-card {
+            background-color: #ffecec;
+        }
+        
+        .card.club-card {
+            background-color: #fff0db;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .card-title {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 54px;
+            color: #0013f4;
+        }
+        
+        .card-divider {
+            height: 1px;
+            background-color: #bdbdbd;
+            margin-bottom: 30px;
+        }
+        
+        .card-list {
+            list-style: none;
+        }
+        
+        .card-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .item-number {
+            background-color: #3cbb00;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            width: 42px;
+            height: 42px;
+            border-radius: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+        }
+        
+        .item-text {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 30px;
+            color: #000000;
+        }
+        
+        /* Why Traders Love Section */
+        .why-traders-section {
+            padding: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .traders-content {
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+        
+        .traders-description {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 31px;
+            color: #9a9a9a;
+        }
+        
+        .service-cards {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            width: 177px;
+            height: 206px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-card.analytics {
+            background-color: #fff0db;
+        }
+        
+        .service-card.blogs {
+            background-color: #f7f5fd;
+        }
+        
+        .service-card.videos {
+            background-color: #ffecec;
+        }
+        
+        .service-card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .service-title {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #000000;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .finance-section {
+            padding: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .finance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .finance-badge {
+            background-color: #34f3c3;
+            padding: 4px 15px;
+            border-radius: 9px;
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #000000;
+        }
+        
+        .shark-investor {
+            position: relative;
+            width: 447px;
+            height: 447px;
+            margin-bottom: 50px;
+        }
+        
+        .shark-investor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .shark-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 238px;
+            height: 238px;
+            background: linear-gradient(296deg, #51ead4 0%, #67f4e000 100%);
+            border-radius: 119px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #f7f7f7;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 54px;
+        }
+        
+        /* On The Go Section */
+        .on-the-go-section {
+            padding: 50px;
+            margin-bottom: 80px;
+            display: flex;
+            gap: 50px;
+        }
+        
+        .on-the-go-content {
+            flex: 1;
+        }
+        
+        .on-the-go-description {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 31px;
+            color: #9a9a9a;
+            margin-bottom: 50px;
+        }
+        
+        .qr-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .qr-code {
+            width: 245px;
+            height: 257px;
+            border-radius: 8px;
+        }
+        
+        .qr-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .qr-title {
+            font-size: 29px;
+            font-weight: 600;
+            line-height: 44px;
+            color: #0013f4;
+            margin-bottom: 10px;
+        }
+        
+        .qr-description {
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 33px;
+            color: #9a9a9a;
+        }
+        
+        .app-screenshot {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .screenshot-frame {
+            background-color: #ffffff;
+            border: 9px solid #edeef5;
+            border-radius: 30px;
+            box-shadow: 9px 116px 200px rgba(0, 0, 0, 0.07);
+            padding: 10px;
+            max-width: 100%;
+        }
+        
+        .screenshot-frame img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+        
+        /* App Download Section */
+        .app-download-section {
+            background-color: #eff4ff;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 80px;
+        }
+        
+        .app-download-title {
+            font-size: 41px;
+            font-weight: 700;
+            line-height: 62px;
+            color: #000000;
+        }
+        
+        .app-download-text {
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #9a9a9a;
+            margin-right: 30px;
+        }
+        
+        .app-store-buttons {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .app-store-button {
+            width: 238px;
+            height: 59px;
+            border-radius: 5px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .testimonials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .testimonials-title {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 54px;
+            color: #000000;
+        }
+        
+        .testimonials-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-button {
+            width: 55px;
+            height: 57px;
+            border: 3px solid #0078ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: #0078ff;
+            cursor: pointer;
+            background: none;
+        }
+        
+        .testimonials-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-avatars {
+            display: flex;
+            margin-right: 20px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 52px;
+            border-radius: 25px;
+            margin-right: -15px;
+        }
+        
+        .rating-stars {
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+        }
+        
+        .rating-text {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 26px;
+            color: #000000;
+        }
+        
+        .testimonials-cards {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .testimonials-cards::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        
+        .testimonial-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0px 1px 85px rgba(0, 0, 0, 0.13);
+            padding: 30px;
+            min-width: 530px;
+            max-width: 555px;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-name {
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 45px;
+            color: #000000;
+        }
+        
+        .testimonial-text {
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 31px;
+            color: #000000;
+        }
+        
+        /* Market Movers Section */
+        .market-movers-section {
+            padding: 50px;
+            margin-bottom: 80px;
+        }
+        
+        .market-movers-title {
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 63px;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        
+        .market-movers-subtitle {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 33px;
+            color: #000000;
+            margin-bottom: 30px;
+        }
+        
+        .market-tables {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .market-table {
+            flex: 1;
+            background-color: #ffffff;
+            border: 1px solid #d9d9d9;
+            border-radius: 5px;
+            box-shadow: 0px 4px 4px rgba(93, 165, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        
+        .table-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 22px;
+            color: #000000;
+        }
+        
+        .table-tabs {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .table-tab {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: #000000;
+            cursor: pointer;
+        }
+        
+        .table-tab.active {
+            color: #0078ff;
+            position: relative;
+        }
+        
+        .table-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #0078ff;
+        }
+        
+        .table-column-headers {
+            display: flex;
+            background-color: #e1efff;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin: 15px;
+        }
+        
+        .column-header {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 19px;
+            color: #0078ff;
+            padding: 5px 0;
+        }
+        
+        .column-header:nth-child(1) {
+            flex: 2;
+            text-align: left;
+        }
+        
+        .column-header:nth-child(2) {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .column-header:nth-child(3) {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .table-body {
+            padding: 0 15px 15px;
+        }
+        
+        .table-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(102, 114, 132, 0.5);
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .table-cell {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 19px;
+        }
+        
+        .table-cell:nth-child(1) {
+            flex: 2;
+            color: #0078ff;
+            text-align: left;
+        }
+        
+        .table-cell:nth-child(2) {
+            flex: 1;
+            color: #000000;
+            text-align: right;
+        }
+        
+        .table-cell:nth-child(3) {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .change-badge {
+            display: inline-block;
+            background-color: #dff9ec;
+            border-radius: 5px;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 14px;
+            color: #41d669;
+            text-align: center;
+            min-width: 71px;
+        }
+        
+        .view-all {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 15px;
+            color: #3f99ff;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        
+        /* Compare Section */
+        .compare-section {
+            padding: 50px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .compare-title {
+            font-size: 64px;
+            font-weight: 600;
+            line-height: 77px;
+            color: #000000;
+            margin-bottom: 50px;
+            max-width: 803px;
+        }
+        
+        .broker-cards {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .broker-card {
+            background-color: #e2e5ff;
+            border-radius: 20px;
+            padding: 20px;
+            width: 375px;
+            height: 135px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .broker-logo {
+            width: 91px;
+            height: 78px;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        
+        .broker-name {
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 45px;
+            color: #000000;
+            flex: 1;
+        }
+        
+        .dropdown-icon {
+            width: 43px;
+            height: 45px;
+        }
+        
+        .compare-button {
+            background-color: #3e51ff;
+            color: #ffffff;
+            font-size: 34px;
+            font-weight: 600;
+            line-height: 42px;
+            padding: 12px 30px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            width: 375px;
+        }
+        
+        .compare-image {
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            width: 614px;
+            height: 549px;
+        }
+        
+        @media (max-width: 1200px) {
+            .header {
+                padding: 0 20px;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .hero-section,
+            .features-section,
+            .highlights-section,
+            .why-traders-section,
+            .finance-section,
+            .on-the-go-section,
+            .app-download-section,
+            .testimonials-section,
+            .market-movers-section,
+            .compare-section {
+                padding: 50px 20px;
+            }
+            
+            .hero-content {
+                max-width: 500px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+                line-height: 60px;
+            }
+            
+            .cards-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                height: auto;
+                min-height: 450px;
+            }
+            
+            .market-tables {
+                flex-direction: column;
+            }
+            
+            .compare-image {
+                width: 400px;
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .logo-text {
+                font-size: 36px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-section {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-image {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .features-row {
+                flex-direction: column;
+            }
+            
+            .on-the-go-section {
+                flex-direction: column;
+            }
+            
+            .app-download-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .app-download-text {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .compare-image {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-top: 30px;
+            }
+            
+            .broker-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .compare-button {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 80px;
+            }
+            
+            .logo-img {
+                height: 35px;
+                width: 65px;
+            }
+            
+            .logo-text {
+                font-size: 28px;
+                line-height: 40px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+                line-height: 50px;
+            }
+            
+            .hero-description {
+                font-size: 18px;
+                line-height: 28px;
+            }
+            
+            .early-access-form {
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 36px;
+                line-height: 50px;
+            }
+            
+            .section-subtitle {
+                font-size: 18px;
+                line-height: 28px;
+            }
+            
+            .service-cards {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .testimonials-cards {
+                flex-direction: column;
+            }
+            
+            .testimonial-card {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .qr-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .app-store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="../assets/images/img_logo.png" alt="Bluestock Logo" class="logo-img">
+                <h1 class="logo-text">BLUESTOCK</h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">PRODUCTS</a>
+                <a href="#" class="nav-item">COMMUNITY</a>
+                <a href="#" class="nav-item">MEDIA <img src="../assets/images/img_polygon_1.svg" alt="Dropdown"></a>
+                <a href="#" class="nav-item">SUPPORT <img src="../assets/images/img_arrow_1.svg" alt="Dropdown"></a>
+                <a href="#" class="nav-item">LIVE NEWS <span class="badge-new">NEW</span></a>
+            </nav>
+            
+            <div class="auth-buttons">
+                <a href="#" class="sign-in">Sign In</a>
+                <button class="sign-up">Sign Up Now</button>
+            </div>
+            
+            <img src="../assets/images/img_gripvertical.svg" alt="Menu" class="menu-toggle">
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div>
+                    <span class="hero-badge">NEW</span>
+                    <span class="app-version">App 2.0 <img src="../assets/images/img_arrow_2.svg" alt="Arrow"></span>
+                </div>
+                
+                <h2 class="hero-title">Free & Open<br>Stock Market Analytics<br>For GenZ</h2>
+                
+                <p class="hero-description">Thousands of traders and investors in India use our<br>stable and reliable mobile app regularly.</p>
+                
+                <div class="early-access-container">
+                    <p class="early-access-label">Get early access</p>
+                    <div class="early-access-form">
+                        <span class="country-code">+91</span>
+                        <input type="text" placeholder="Enter mobile number" class="mobile-input">
+                        <button class="submit-button">
+                            <img src="../assets/images/img_group_1000002474.svg" alt="Submit">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <!-- Placeholder for hero image -->
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-intro">
+                <p class="features-subtitle">Built for a growing India.</p>
+            </div>
+            
+            <div class="features-row">
+                <div class="feature-item">
+                    <h3 class="feature-title">It's easy</h3>
+                    <h3 class="feature-title black">It's powerful</h3>
+                    <h3 class="feature-title">It's beautiful</h3>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-image">
+                        <img src="../assets/images/img_3drenderthumbupsignisolatedhandgestureremovebgpreview_1.png" alt="Thumbs up">
+                    </div>
+                    <p class="feature-description">
+                        Beautiful UI for the modern trader,<br>
+                        with access on all platforms,<br>
+                        to trade on the go
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Highlights Section -->
+        <section class="highlights-section">
+            <h2 class="section-title">Bluestock Highlights</h2>
+            <p class="section-subtitle">
+                Simplified enough for beginners, Detailed enough for experts.<br>
+                Track upcoming IPOs, Leverage advanced tools to<br>
+                make the best decisions.
+            </p>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Learn Chart</h3>
+                        <img src="../assets/images/img_vector_32x36.svg" alt="Chart Icon">
+                    </div>
+                    
+                    <div class="card-divider"></div>
+                    
+                    <ul class="card-list">
+                        <li class="card-list-item">
+                            <div class="item-number">1</div>
+                            <span class="item-text">Technical, Fundamental</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">2</div>
+                            <span class="item-text">Finology, Facts, Equity</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Trading Psychology</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Risk Assessment</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Option Trading</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card analytics-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Analytics</h3>
+                        <img src="../assets/images/img_vector_38x38.svg" alt="Analytics Icon">
+                    </div>
+                    
+                    <div class="card-divider"></div>
+                    
+                    <ul class="card-list">
+                        <li class="card-list-item">
+                            <div class="item-number">1</div>
+                            <span class="item-text">Live Sector Trend</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">2</div>
+                            <span class="item-text">IPO DRHP</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Sectoral Distribution</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Stock Overview</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">TradingView Chart</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Technical, Fundamental</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card club-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Club</h3>
+                        <img src="../assets/images/img_simplelineiconsenergy.svg" alt="Club Icon">
+                    </div>
+                    
+                    <div class="card-divider"></div>
+                    
+                    <ul class="card-list">
+                        <li class="card-list-item">
+                            <div class="item-number">1</div>
+                            <span class="item-text">Educational Resources</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">2</div>
+                            <span class="item-text">Real-time Chat</span>
+                        </li>
+                        <li class="card-list-item">
+                            <div class="item-number">3</div>
+                            <span class="item-text">Forums</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why Traders Love Section -->
+        <section class="why-traders-section">
+            <div class="traders-content">
+                <h2 class="section-title">Why do traders love bluestock?</h2>
+                <p class="traders-description">
+                    Bluestock caters to traders looking to enhance<br>
+                    their technical analysis skills, providing a user-friendly<br>
+                    environment to interpret and leverage charts effectively<br>
+                    for strategic decision-making in the financial markets.
+                </p>
+            </div>
+            
+            <div class="service-cards">
+                <div class="service-card analytics">
+                    <img src="../assets/images/img_rectangle_4259.png" alt="Analytics">
+                    <p class="service-title">Analytics</p>
+                </div>
+                
+                <div class="service-card blogs">
+                    <img src="../assets/images/img_rectangle_4258.png" alt="Blogs">
+                    <p class="service-title">Blogs</p>
+                </div>
+                
+                <div class="service-card videos">
+                    <img src="../assets/images/img_rectangle_4257.png" alt="Videos">
+                    <p class="service-title">Videos</p>
+                </div>
+            </div>
+            
+            <div class="finance-header">
+                <h2 class="section-title">All things finance,right here</h2>
+                <div class="finance-badge">Resources</div>
+            </div>
+            
+            <p class="traders-description">
+                Master the art of investing and secure your financial future with Bluestock learning resources.
+            </p>
+            
+            <div class="shark-investor">
+                <img src="../assets/images/img_rectangle_4249.png" alt="Investor">
+                <div class="shark-badge">
+                    Shark<br>Investor
+                </div>
+            </div>
+        </section>
+        
+        <!-- On The Go Section -->
+        <section class="on-the-go-section">
+            <div class="on-the-go-content">
+                <h2 class="section-title">On The Go</h2>
+                <p class="on-the-go-description">
+                    We believe that everyone should be able to wield technology while learn trading. Use Bluestock on the go, on your mobile device. Experience the ultimate trading experience on Android or IOS.
+                </p>
+                
+                <div class="qr-container">
+                    <img src="../assets/images/img_rectangle_4127.png" alt="QR Code" class="qr-code">
+                    <div class="qr-text">
+                        <h3 class="qr-title">Scan and download</h3>
+                        <p class="qr-description">
+                            Use your android device<br>
+                            to download the app
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-screenshot">
+                <div class="screenshot-frame">
+                    <img src="../assets/images/img_screenshot20231230160605_1.png" alt="App Screenshot">
+                </div>
+            </div>
+        </section>
+        
+        <!-- App Download Section -->
+        <section class="app-download-section">
+            <h2 class="app-download-title">Bluestock App 2.0 is Live Now!</h2>
+            <p class="app-download-text">Download Our App</p>
+            <div class="app-store-buttons">
+                <img src="../assets/images/img_google_play_download_bar.png" alt="Google Play" class="app-store-button">
+                <img src="../assets/images/img_app_store_download_bar.png" alt="App Store" class="app-store-button">
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="testimonials-header">
+                <h2 class="section-title">What do our users say?</h2>
+                <div class="testimonials-nav">
+                    <button class="nav-button" id="prev-testimonial">&lt;</button>
+                    <button class="nav-button" id="next-testimonial">&gt;</button>
+                </div>
+            </div>
+            
+            <div class="testimonials-rating">
+                <div class="user-avatars">
+                    <img src="../assets/images/img_person1_image.png" alt="User" class="user-avatar">
+                    <img src="../assets/images/img_iperson2_image.png" alt="User" class="user-avatar">
+                    <img src="../assets/images/img_person3_image.png" alt="User" class="user-avatar">
+                    <img src="../assets/images/img_person4_image.png" alt="User" class="user-avatar">
+                </div>
+                
+                <div class="rating-stars">
+                    <img src="../assets/images/img_vector_26x26.svg" alt="Star">
+                    <img src="../assets/images/img_vector_26x26.svg" alt="Star">
+                    <img src="../assets/images/img_vector_26x26.svg" alt="Star">
+                    <img src="../assets/images/img_vector_26x26.svg" alt="Star">
+                    <img src="../assets/images/img_vector_26x26.svg" alt="Star">
+                </div>
+                
+                <p class="rating-text">(5/5 by 100+ users)</p>
+            </div>
+            
+            <div class="testimonials-cards">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <h3 class="testimonial-name">Venkatesh</h3>
+                        <img src="../assets/images/img_rectangle_4338.png" alt="User">
+                    </div>
+                    <p class="testimonial-text">
+                        Excellent app with a fantastic UI! 🤩 Even
+                        though the app is still in progressive mode,
+                        I must say it is getting better every day. 
+                        It has an amazing user interface.
+                    </p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <h3 class="testimonial-name">Sarthak</h3>
+                        <img src="../assets/images/img_rectangle_4338.png" alt="User">
+                    </div>
+                    <p class="testimonial-text">
+                        Bluestock app provides a user-friendly 
+                        interface 📈The clean design and intuitive
+                        navigation enhance the overall experience.
+                    </p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <h3 class="testimonial-name">Sakshi</h3>
+                        <img src="../assets/images/img_rectangle_4338.png" alt="User">
+                    </div>
+                    <p class="testimonial-text">
+                        BlueStock for chart learning & technical 
+                        and it has exceeded my expectations.
+                        The UI is well-designed, making it a breeze to navigate and learn charts.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Market Movers Section -->
+        <section class="market-movers-section">
+            <h2 class="market-movers-title">Market Movers</h2>
+            <p class="market-movers-subtitle">Learn about Stock market updates today - 52 Week Highs, 52 week Lows and more.</p>
+            
+            <div class="market-tables">
+                <div class="market-table">
+                    <div class="table-header">
+                        <div class="table-title">
+                            <img src="../assets/images/img_vector.svg" alt="Icon">
+                            <span>52 Week High</span>
+                        </div>
+                        
+                        <div class="table-tabs">
+                            <span class="table-tab active">NSE</span>
+                            <span class="table-tab">BSE</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-column-headers">
+                        <div class="column-header">COMPANY</div>
+                        <div class="column-header">PRICE Rs.</div>
+                        <div class="column-header">DAY HIGH Rs.</div>
+                    </div>
+                    
+                    <div class="table-body">
+                        <div class="table-row">
+                            <div class="table-cell">Indian Railway Finance</div>
+                            <div class="table-cell">113.40</div>
+                            <div class="table-cell">114.00</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Firstsource Solution</div>
+                            <div class="table-cell">209.90</div>
+                            <div class="table-cell">217.00</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">HCL Tech.</div>
+                            <div class="table-cell">1,540.80</div>
+                            <div class="table-cell">1,555.00</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">ONGC</div>
+                            <div class="table-cell">223.40</div>
+                            <div class="table-cell">224.75</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Avanti Feeds</div>
+                            <div class="table-cell">545.30</div>
+                            <div class="table-cell">581.40</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Coforge</div>
+                            <div class="table-cell">6,592.70</div>
+                            <div class="table-cell">6,615.00</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Infibeam Avenues</div>
+                            <div class="table-cell">26.55</div>
+                            <div class="table-cell">27.50</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Tata Power</div>
+                            <div class="table-cell">357.75</div>
+                            <div class="table-cell">361.85</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Bank Of India</div>
+                            <div class="table-cell">129.10</div>
+                            <div class="table-cell">130.10</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Tata Consumer Products</div>
+                            <div class="table-cell">1,159.00</div>
+                            <div class="table-cell">1,165.55</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Zomato</div>
+                            <div class="table-cell">139.55</div>
+                            <div class="table-cell">141.50</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Tata Motors</div>
+                            <div class="table-cell">816.45</div>
+                            <div class="table-cell">818.55</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Rail Vikas Nigam</div>
+                            <div class="table-cell">203.25</div>
+                            <div class="table-cell">207.00</div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">IRCTC</div>
+                            <div class="table-cell">951.20</div>
+                            <div class="table-cell">962.00</div>
+                        </div>
+                        
+                        <a href="#" class="view-all">View All 52 Week High</a>
+                    </div>
+                </div>
+                
+                <div class="market-table">
+                    <div class="table-header">
+                        <div class="table-title">
+                            <img src="../assets/images/img_group.svg" alt="Icon">
+                            <span>52 Week LOW</span>
+                        </div>
+                        
+                        <div class="table-tabs">
+                            <span class="table-tab active">NSE</span>
+                            <span class="table-tab">BSE</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-column-headers">
+                        <div class="column-header">COMPANY</div>
+                        <div class="column-header">PRICE Rs.</div>
+                        <div class="column-header">CHANGE %</div>
+                    </div>
+                    
+                    <div class="table-body">
+                        <div class="table-row">
+                            <div class="table-cell">Mukesh Babu Fin Serv</div>
+                            <div class="table-cell">149.10</div>
+                            <div class="table-cell"><span class="change-badge">+20%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Jupiter Infomedia</div>
+                            <div class="table-cell">50.20</div>
+                            <div class="table-cell"><span class="change-badge">+19.98%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Jigar Cables</div>
+                            <div class="table-cell">66.45</div>
+                            <div class="table-cell"><span class="change-badge">+19.95%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Dhanlaxmi Bank</div>
+                            <div class="table-cell">36.30</div>
+                            <div class="table-cell"><span class="change-badge">+19.8%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">CNI Research</div>
+                            <div class="table-cell">4.00</div>
+                            <div class="table-cell"><span class="change-badge">+19.76%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Manomay Tex India</div>
+                            <div class="table-cell">193.10</div>
+                            <div class="table-cell"><span class="change-badge">+19.68%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Eastern Logica Info</div>
+                            <div class="table-cell">1,329.80</div>
+                            <div class="table-cell"><span class="change-badge">+19.41%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Ansal Buildwell</div>
+                            <div class="table-cell">119.99</div>
+                            <div class="table-cell"><span class="change-badge">+19.38%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Upsurge Investment</div>
+                            <div class="table-cell">55.60</div>
+                            <div class="table-cell"><span class="change-badge">+19.34%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Palred Technologies</div>
+                            <div class="table-cell">210.60</div>
+                            <div class="table-cell"><span class="change-badge">+18.38%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Service Care</div>
+                            <div class="table-cell">67.50</div>
+                            <div class="table-cell"><span class="change-badge">+17.39%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Zodiac Ventures</div>
+                            <div class="table-cell">23.94</div>
+                            <div class="table-cell"><span class="change-badge">+16.33%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Mitcon Consultancy</div>
+                            <div class="table-cell">105.85</div>
+                            <div class="table-cell"><span class="change-badge">+16.06%</span></div>
+                        </div>
+                        
+                        <div class="table-row">
+                            <div class="table-cell">Ashiana Housing</div>
+                            <div class="table-cell">311.35</div>
+                            <div class="table-cell"><span class="change-badge">+14.97%</span></div>
+                        </div>
+                        
+                        <a href="#" class="view-all">View All Gainers</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Compare Section -->
+        <section class="compare-section">
+            <h2 class="compare-title">Compare and choose<br>Best Stock Broker for you</h2>
+            
+            <div class="broker-cards">
+                <div class="broker-card">
+                    <img src="../assets/images/img_rectangle_4341.png" alt="Angel One" class="broker-logo">
+                    <h3 class="broker-name">Angel One</h3>
+                    <img src="../assets/images/img_caretdown.svg" alt="Dropdown" class="dropdown-icon">
+                </div>
+                
+                <div class="broker-card">
+                    <img src="../assets/images/img_rectangle_4342.png" alt="Zerodha" class="broker-logo">
+                    <h3 class="broker-name">Zerodha</h3>
+                    <img src="../assets/images/img_caretdown.svg" alt="Dropdown" class="dropdown-icon">
+                </div>
+            </div>
+            
+            <button class="compare-button">Compare</button>
+            
+            <img src="../assets/images/img_rectangle_4343.png" alt="Compare Brokers" class="compare-image">
+        </section>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Testimonial carousel
+        const testimonialCards = document.querySelector('.testimonials-cards');
+        const prevButton = document.getElementById('prev-testimonial');
+        const nextButton = document.getElementById('next-testimonial');
+        
+        let currentPosition = 0;
+        const cardWidth = 555; // Width of a testimonial card + margin
+        
+        prevButton.addEventListener('click', () => {
+            if (currentPosition > 0) {
+                currentPosition--;
+                testimonialCards.scrollTo({
+                    left: currentPosition * cardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        nextButton.addEventListener('click', () => {
+            const maxPosition = document.querySelectorAll('.testimonial-card').length - 1;
+            if (currentPosition < maxPosition) {
+                currentPosition++;
+                testimonialCards.scrollTo({
+                    left: currentPosition * cardWidth,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // Form submission
+        const earlyAccessForm = document.querySelector('.early-access-form');
+        const mobileInput = document.querySelector('.mobile-input');
+        const submitButton = document.querySelector('.submit-button');
+        
+        submitButton.addEventListener('click', () => {
+            const mobileNumber = mobileInput.value.trim();
+            if (mobileNumber && /^\d{10}$/.test(mobileNumber)) {
+                alert('Thank you for your interest! We will send you an access link shortly.');
+                mobileInput.value = '';
+            } else {
+                alert('Please enter a valid 10-digit mobile number.');
+            }
+        });
+        
+        // Table tabs
+        const tableTabs = document.querySelectorAll('.table-tab');
+        
+        tableTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Find all tabs in the same table
+                const tabsInSameTable = tab.closest('.table-tabs').querySelectorAll('.table-tab');
+                
+                // Remove active class from all tabs
+                tabsInSameTable.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // In a real app, this would load different data
+                // For demo, we'll just show a message
+                if (tab.textContent === 'BSE') {
+                    alert('Loading BSE data...');
+                } else {
+                    alert('Loading NSE data...');
+                }
+            });
+        });
+        
+        // Broker comparison
+        const compareButton = document.querySelector('.compare-button');
+        
+        compareButton.addEventListener('click', () => {
+            alert('Comparing selected brokers...');
+        });
+        
+        // QR code scanning simulation
+        const qrCode = document.querySelector('.qr-code');
+        
+        qrCode.addEventListener('click', () => {
+            alert('Scanning QR code to download the app...');
+        });
+        
+        // App store buttons
+        const appStoreButtons = document.querySelectorAll('.app-store-button');
+        
+        appStoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.alt.includes('Google Play')) {
+                    alert('Redirecting to Google Play Store...');
+                } else {
+                    alert('Redirecting to Apple App Store...');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
